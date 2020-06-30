@@ -1,0 +1,9 @@
+<h1>Building Index Page</h1>
+
+<h5>List of Buildings:</h5>
+<ul>
+    <% @buildings.each do |building| %>
+        <li><%= link_to building.name, building %></li>
+        Floor levels available: <%= building.number_of_floors_available.join(", ") %>
+    <% end %>
+</ul>
