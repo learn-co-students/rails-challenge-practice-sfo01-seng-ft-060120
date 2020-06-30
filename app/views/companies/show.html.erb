@@ -1,0 +1,33 @@
+<h1><%= @company.name %></h1>
+
+<h4>Office Locations:</h4>
+<ul>
+<% @company.offices.each do |office| %>
+    <li><%= link_to office.building.name, office.building %></li>
+    - Floor: <%= office.floor %>
+<% end %>
+</ul>
+
+<h4>Total Rent Cost:</h4>
+$<%= @company.total_rent %>
+
+<h4>Add an Employee:</h4>
+<%= form_for @employee do |f|%>
+    <%= f.hidden_field :company_id, value: @company.id %>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %><br>
+
+<%= f.submit %>
+<% end %>
+
+<h4>List of Employees:</h4>
+<ul>
+<% @company.employees.each do |employee| %>
+    <li><%= employee.name %></li>
+    - Title: <%= employee.title %><br>
+    <%= button_to "Remove employee?", employee_path(employee), { method: :delete, data: { confirm: 'Are you sure?'} } %>
+<% end %>
+</ul>
